@@ -39,3 +39,38 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
   
+  // Lightbox functionality
+const lightboxImgs = document.querySelectorAll(".lightbox-img");
+const lightboxModal = document.getElementById("lightbox-modal");
+const lightboxModalImg = document.getElementById("lightbox-img");
+const closeLightbox = document.querySelector(".close-lightbox");
+
+lightboxImgs.forEach(img => {
+  img.addEventListener("click", () => {
+    lightboxModal.style.display = "block";
+    lightboxModalImg.src = img.src;
+  });
+});
+
+closeLightbox.addEventListener("click", () => {
+  lightboxModal.style.display = "none";
+});
+
+// Close on outside click
+lightboxModal.addEventListener("click", (e) => {
+  if (e.target === lightboxModal) {
+    lightboxModal.style.display = "none";
+  }
+});
+// Show next image
+nextBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % lightboxImgs.length;
+  lightboxModalImg.src = lightboxImgs[currentIndex].src;
+});
+
+// Show previous image
+prevBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + lightboxImgs.length) % lightboxImgs.length;
+  lightboxModalImg.src = lightboxImgs[currentIndex].src;
+});
+
